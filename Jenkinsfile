@@ -13,13 +13,13 @@ pipeline {
         }
         stage('Test'){
             steps{
+                 bat 'mvn test'
                 script{
-                    try {
-                        bat 'mvn test'
-                    }catch(Exception e){
-                        currentBuild.result = 'FAILED'
-                        error "Test Failed : ${e.message}"
-                    }
+              
+                       if(currentBuild.result == 'FAILURE'){
+                        error "Test Failed"
+                     }
+
                 }
             }
         }
