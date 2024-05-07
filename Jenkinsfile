@@ -13,14 +13,13 @@ pipeline {
         }
         stage('Test'){
             steps{
-                bat 'mvn test'
-            }
-            post {
-                failure {
-                    script {
-                        currentBuild.result = 'FAILED'
-                    }
+                try {
+                    bat 'mvn test'
+                }catch(Exception e){
+                    currentBuild.result = 'FAILED'
+                    error "Test Failed" : ${e.message}"
                 }
+                
             }
         }
         stage('Clean Up') {
