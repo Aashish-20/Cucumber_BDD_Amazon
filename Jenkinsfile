@@ -17,7 +17,7 @@ pipeline {
                     bat 'mvn test'
                 }catch(Exception e){
                     currentBuild.result = 'FAILED'
-                    error "Test Failed" : ${e.message}"
+                    error "Test Failed : ${e.message}"
                 }
                 
             }
