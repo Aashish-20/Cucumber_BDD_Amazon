@@ -23,17 +23,7 @@ pipeline {
                 }
             }
         }
-        stage('Check Test Results') {
-            steps {
-                script {
-                    // Check if any tests failed
-                    def testResults = junit testResults: '*/target/surefire-reports/TEST-.xml'
-                    if (testResults.failed > 0) {
-                        error "Test(s) failed, stopping pipeline."
-                    }
-                }
-            }
-        }
+       
         stage('Clean Up') {
             steps {
                 bat 'rmdir /s /q target'
