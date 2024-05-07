@@ -15,6 +15,13 @@ pipeline {
             steps{
                 bat 'mvn test'
             }
+            post {
+                failure {
+                    script {
+                        currentBuild.result = 'FAILED'
+                    }
+                }
+            }
         }
         stage('Clean Up') {
             steps {
