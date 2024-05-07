@@ -16,5 +16,10 @@ pipeline {
                 bat 'mvn test'
             }
         }
+        stage('Clean Up') {
+            steps {
+                bat 'rmdir /s /q target'
+            }
+        }
     }
 }
